@@ -1,0 +1,54 @@
+<button class="btn btn-primary" (click)="showForm()">+</button>
+<form [formGroup]="bookForm" *ngIf = 'isFormOpen' (submit)="onSubmit() ">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name"  placeholder="Enter name" formControlName="nameControl">
+    </div>
+
+
+    <select class="form-select" formControlName = "genreControl">
+      <option selected>Select Genre</option>
+      <option value="ACTION">Action</option>
+      <option value="SELF_DEVELOPMENT">Self Development</option>
+      <option value="SF">SF</option>
+    </select>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea  class="form-control" id="description" placeholder="Description" formControlName="descriptionControl"></textarea>
+    </div>
+   
+    <div class="form-check form-switch">
+      <input class="form-check-input" formControlName = "isAdultContentControl" type="checkbox" id="flexSwitchCheckChecked" >
+      <label class="form-check-label" for="flexSwitchCheckChecked">Legal Age</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary"  >{{idControl.value ? "Edit" : "Create"}}</button>
+  </form>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Legal Content</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of allBooks ; let index = index">
+        <th scope="row">{{index + 1}}</th>
+        <td>{{book.name}}</td>
+        <td>{{book.genre}}</td>
+        <td>{{book.description}}</td>
+        <td>{{book.isAdultContent}}</td>
+        <td><div>
+            <button type="button" class="btn btn-danger" (click)="onRemove(book.id)">X</button>
+            <button type="button" class="btn btn-warning" (click)="onEdit(book)">Update</button>
+        </div></td>
+      </tr> 
+    </tbody>
+</table>

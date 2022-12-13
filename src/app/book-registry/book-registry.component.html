@@ -1,0 +1,41 @@
+<button class="btn btn-primary" (click)="showForm()">+</button>
+<form [formGroup]="registryForm" *ngIf = 'isFormOpen' (submit)="onSubmit() ">
+    <div class="form-group">
+      <label for="name">Book</label>
+      <select class="form-select" formControlName = "bookIdControl">
+        <option selected>Select Book</option>
+        <option value="SELF_DEVELOPMENT">Self Development</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="dateOfBirth">Date of birth</label>
+      <select class="form-select" formControlName = "customerIdControl">
+        <option selected>Select Customer</option>
+        <option value="SELF_DEVELOPMENT">Self Development</option>
+      </select>
+    </div>
+  
+    <button type="submit" class="btn btn-primary"  >{{idControl.value ? 'Edit ' : ' Create'}}</button>
+  </form>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Book</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let register of registries ; let index = index ; ">
+      <th scope="row">{{index + 1}}</th>
+      <td>{{register.customerId}}</td>
+      <td>{{register.bookId}}</td>
+      <td><div>
+          <button type="button" class="btn btn-danger" (click)="onRemove(register.id)">Cancel Reservation</button>
+      </div></td>
+    </tr> 
+  </tbody>
+</table>
